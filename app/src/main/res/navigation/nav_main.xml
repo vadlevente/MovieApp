@@ -3,6 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_main"
     app:startDestination="@id/popularMoviesFragment">
-    <fragment android:id="@+id/popularMoviesFragment" android:name="com.example.movieapp.scenes.popularmovies.PopularMoviesFragment"/>
+    <fragment
+        android:id="@+id/popularMoviesFragment"
+        android:name="com.example.movieapp.scenes.popularmovies.PopularMoviesFragment"
+        android:label="@string/label_popular_movies">
+        <action android:id="@+id/navigate_popularMovies_to_movieDetails"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchMovieFragment"
+        android:name="com.example.movieapp.scenes.searchmovie.SearchMovieFragment"
+        android:label="@string/label_search_movies">
+        <action android:id="@+id/navigate_searchMovie_to_movieDetails"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.movieapp.scenes.moviedetails.MovieDetailsFragment"
+        android:label="@string/label_movie_details">
+        <argument android:name="movieId" app:argType="long" app:nullable="false"/>
+    </fragment>
 
 </navigation>

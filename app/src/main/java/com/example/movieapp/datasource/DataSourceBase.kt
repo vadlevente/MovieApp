@@ -15,11 +15,4 @@ open class DataSourceBase {
         }
     }
 
-    protected fun handlePostResponse(response: Response<PostResponse>) {
-        val body = response.body()
-        if(!response.isSuccessful || body?.statusCode != 1) {
-            throw NetworkError(body?.statusMessage)
-        }
-    }
-
 }

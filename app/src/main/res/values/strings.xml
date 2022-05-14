@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MovieApp</string>
+
+    <string name="label_genres">Műfaj:</string>
+    <string name="label_budget">Költségvetés:</string>
+    <string name="label_release_date">Premier dátuma:</string>
+    <string name="label_revenue">Bevétel:</string>
+    <string name="label_popular_movies">Népszerű filmek</string>
+    <string name="label_search_movies">Film keresése</string>
+    <string name="label_movie_details">Film adatai</string>
+    <string name="hint_search">Keresendő film címe</string>
 </resources>

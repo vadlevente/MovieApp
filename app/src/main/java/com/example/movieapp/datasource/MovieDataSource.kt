@@ -1,20 +1,17 @@
 package com.example.movieapp.datasource
 
-import com.example.movieapp.models.ImageConfiguration
 import com.example.movieapp.models.MovieDetails
-import com.example.movieapp.models.popularmovies.PopularMovies
+import com.example.movieapp.models.MovieQueryResult
 import com.example.movieapp.network.api.MovieApi
-import com.example.movieapp.network.model.requests.RateMovieRequest
 
 interface MovieDataSource{
-    suspend fun getPopularMovies(page: Long): PopularMovies
+    suspend fun getPopularMovies(page: Long): MovieQueryResult
     suspend fun getMovieDetails(movieId: Long): MovieDetails
-    suspend fun rateMovie(movieId: Long, rating: Float)
 }
 
 class NetworkMovieDataSource(private val movieApi: MovieApi): DataSourceBase(), MovieDataSource {
 
-    override suspend fun getPopularMovies(page: Long): PopularMovies {
+    override suspend fun getPopularMovies(page: Long): MovieQueryResult {
         val response = movieApi.getPopularMovies(page)
         return handleGetResponse(response)
     }
@@ -24,8 +21,4 @@ class NetworkMovieDataSource(private val movieApi: MovieApi): DataSourceBase(), 
         return handleGetResponse(response)
     }
 
-    override suspend fun rateMovie(movieId: Long, rating: Float) {
-        val response = movieApi.rateMovie(movieId, RateMovieRequest(rating))
-        handlePostResponse(response)
-    }
 }

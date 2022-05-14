@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.movieapp.scenes.popularmovies.PopularMoviesViewModel" />
+            type="com.example.movieapp.scenes.searchmovie.SearchMovieViewModel" />
         <variable
             name="adapter"
             type="com.example.movieapp.scenes.popularmovies.adapter.MoviesAdapter" />
@@ -22,18 +22,34 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    />
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:iconifiedByDefault="false"
+                    android:focusable="true"
+                    app:queryHint="@string/hint_search"/>
+
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintTop_toBottomOf="@id/appbarLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:paddingTop="4dp"
@@ -43,6 +59,9 @@
                 app:submitList="@{viewModel.listItems}"
                 app:setConfiguration="@{viewModel.imageConfiguration}"
                 />
+
+            <include layout="@layout/layout_cover"
+                state="@{viewModel.state}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

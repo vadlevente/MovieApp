@@ -7,3 +7,5 @@ class Loading: ViewState()
 class Content: ViewState()
 
 class Error: ViewState()
+
+class Empty: ViewState()

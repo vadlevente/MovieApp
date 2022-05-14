@@ -1,7 +1,6 @@
 package com.example.movieapp.scenes.popularmovies.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -9,10 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.models.ImageConfiguration
-import com.example.movieapp.models.popularmovies.MovieOverview
-import com.example.movieapp.models.popularmovies.PopularMoviesListItem
+import com.example.movieapp.models.MovieOverview
 
-class PopularMoviesAdapter(private val listener: PopularMoviesAdaperListener): RecyclerView.Adapter<PopularMoviesAdapter.MovieViewHolder>() {
+class MoviesAdapter(private val listener: PopularMoviesAdaperListener): RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     var items = listOf<MovieOverview>()
 
@@ -31,11 +29,14 @@ class PopularMoviesAdapter(private val listener: PopularMoviesAdaperListener): R
         return items.size
     }
 
-    class MovieViewHolder(private val binding: ViewDataBinding): RecyclerView.ViewHolder(binding.root){
+    inner class MovieViewHolder(private val binding: ViewDataBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: MovieOverview, imageConfiguration: ImageConfiguration?){
             binding.setVariable(BR.movie, item)
             binding.setVariable(BR.imageConfiguration, imageConfiguration)
             binding.executePendingBindings()
+            binding.root.setOnClickListener {
+                listener.onMovieClicked(item.id)
+            }
         }
     }
 

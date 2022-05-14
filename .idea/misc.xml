@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/fragment_movie_details.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/fragment_popular_movies.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/fragment_search_movie.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/layout_cover.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/list_item_popular_movies.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/menu/menu_drawer.xml" value="0.28177083333333336" />
       </map>
     </option>
   </component>

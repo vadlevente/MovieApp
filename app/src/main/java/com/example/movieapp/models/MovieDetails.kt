@@ -8,11 +8,11 @@ data class MovieDetails(
     @SerializedName("id")
     val id: Long,
     @SerializedName("backdrop_path")
-    val imagePath: String,
+    val imagePath: String?,
     @SerializedName("original_title")
     val title: String,
     @SerializedName("release_date")
-    val releaseDate: Date,
+    val releaseDate: Date?,
     @SerializedName("vote_average")
     val rating: Float,
     @SerializedName("overview")
@@ -24,7 +24,7 @@ data class MovieDetails(
     @SerializedName("budget")
     val budget: Long,
     @SerializedName("revenue")
-    val revenue: String?
+    val revenue: Long
 )
 
 data class Genre(
