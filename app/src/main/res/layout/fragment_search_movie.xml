@@ -61,6 +61,12 @@
                 />
 
             <include layout="@layout/layout_cover"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbarLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 state="@{viewModel.state}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

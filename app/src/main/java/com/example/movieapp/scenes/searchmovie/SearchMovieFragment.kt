@@ -11,6 +11,7 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentPopularMoviesBinding
 import com.example.movieapp.databinding.FragmentSearchMovieBinding
 import com.example.movieapp.extensions.navController
+import com.example.movieapp.extensions.showKeyboard
 import com.example.movieapp.scenes.common.ToolbarFragment
 import com.example.movieapp.scenes.popularmovies.PopularMoviesFragmentDirections
 import com.example.movieapp.scenes.popularmovies.PopularMoviesViewModel
@@ -52,7 +53,10 @@ class SearchMovieFragment: ToolbarFragment(), PopularMoviesAdaperListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchView.onActionViewExpanded()
+        binding.searchView.apply {
+            onActionViewExpanded()
+            showKeyboard()
+        }
     }
 
     override fun onMovieClicked(movieId: Long) {

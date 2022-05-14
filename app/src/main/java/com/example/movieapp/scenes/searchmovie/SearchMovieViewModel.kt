@@ -17,12 +17,15 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
     private val _listItems = MutableLiveData<List<MovieOverview>>()
     val listItems: LiveData<List<MovieOverview>> = _listItems
 
+    init {
+        setEmptyState()
+    }
+
     fun onSearchTextChanged(text: String){
         viewModelScope.launch{
             try {
                 setLoadingState()
                 getData(text, true)
-                setContentState()
             } catch (t: Throwable){
                 setErrorState()
             }
@@ -31,19 +34,23 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
 
     fun onSearchTextSubmitted(text: String){
         viewModelScope.launch{
-//            try {
+            try {
                 setLoadingState()
                 getData(text, false)
-                setContentState()
-//            } catch (t: Throwable){
-//                setErrorState()
-//            }
+            } catch (t: Throwable){
+                setErrorState()
+            }
         }
     }
 
     private suspend fun getData(query: String, fromCache: Boolean = true) {
         getConfiguration()
         getMovies(query, fromCache)
+        if(_listItems.value.isNullOrEmpty()){
+            setEmptyState()
+        } else {
+            setContentState()
+        }
     }
 
     private suspend fun getMovies(query: String, fromCache: Boolean = true) {
@@ -57,9 +64,6 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
 
     private fun submitList(movies: List<MovieOverview>){
        _listItems.value = movies
-        if(movies.isEmpty()){
-            setEmptyState()
-        }
     }
 
 }

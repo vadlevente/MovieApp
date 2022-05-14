@@ -9,7 +9,9 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        setCoverVisibility="@{state}">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,6 +20,8 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textAlignment="center"
+            android:text="@string/warning_empty_list"
+            android:textColor="@color/black"
             setEmptyVisibility="@{state}"
             />
 
@@ -28,15 +32,18 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textAlignment="center"
+            android:text="@string/warning_network_error"
             setErrorVisibility="@{state}"
             />
 
         <ProgressBar
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_gravity="center"
-            setProgressVisibility="@{state}"/>
+            android:indeterminateTint="#222222"
+            android:progressTint="#222222"
+            setProgressVisibility="@{state}"
+            />
 
     </FrameLayout>
 

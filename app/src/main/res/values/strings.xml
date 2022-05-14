@@ -9,4 +9,6 @@
     <string name="label_search_movies">Film keresése</string>
     <string name="label_movie_details">Film adatai</string>
     <string name="hint_search">Keresendő film címe</string>
+    <string name="warning_empty_list">Nem található a keresésnek megfelelő elem</string>
+    <string name="warning_network_error">A kiszolgálóval folytatott kommunikáció során hiba történt!\nKérlek, ellenőrizd az internetkapcsolatot!</string>
 </resources>

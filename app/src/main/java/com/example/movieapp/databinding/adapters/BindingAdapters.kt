@@ -1,6 +1,7 @@
 package com.example.movieapp.databinding.adapters
 
 import android.net.Uri
+import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -12,10 +13,7 @@ import com.example.movieapp.R
 import com.example.movieapp.models.Genre
 import com.example.movieapp.models.ImageConfiguration
 import com.example.movieapp.models.MovieOverview
-import com.example.movieapp.models.state.Empty
-import com.example.movieapp.models.state.Error
-import com.example.movieapp.models.state.Loading
-import com.example.movieapp.models.state.ViewState
+import com.example.movieapp.models.state.*
 import com.example.movieapp.scenes.popularmovies.adapter.MoviesAdapter
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -67,7 +65,7 @@ fun setSimpleDateText(textView: TextView, date: Date?){
 @BindingAdapter("setDetailedDateText")
 fun setDetailedDateText(textView: TextView, date: Date?){
     date?.let {
-        textView.text = getDateText(date, "yyyy. mm. dd.")
+        textView.text = getDateText(date, "yyyy. MM. dd.")
     }
 }
 
@@ -88,6 +86,11 @@ fun setGenreText(view: TextView, genres: List<Genre>?){
     view.text = genreString
 }
 
+@BindingAdapter("setCoverVisibility")
+fun setCoverVisibility(view: View, viewState: ViewState){
+    view.isVisible = viewState !is Content
+}
+
 @BindingAdapter("setEmptyVisibility")
 fun setEmptyVisibility(textView: TextView, viewState: ViewState){
     textView.isVisible = viewState is Empty
@@ -98,7 +101,7 @@ fun setErrorVisibility(textView: TextView, viewState: ViewState){
     textView.isVisible = viewState is Error
 }
 
-@BindingAdapter("cover:setProgressVisibility")
+@BindingAdapter("setProgressVisibility")
 fun setProgressVisibility(progressBar: ProgressBar, viewState: ViewState){
     progressBar.isVisible = viewState is Loading
 }
