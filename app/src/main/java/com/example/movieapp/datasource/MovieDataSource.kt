@@ -1,5 +1,6 @@
 package com.example.movieapp.datasource
 
+import com.example.movieapp.models.ImageConfiguration
 import com.example.movieapp.models.MovieDetails
 import com.example.movieapp.models.popularmovies.PopularMovies
 import com.example.movieapp.network.api.MovieApi

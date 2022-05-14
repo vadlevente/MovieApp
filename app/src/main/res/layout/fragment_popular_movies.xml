@@ -27,6 +27,7 @@
             android:orientation="vertical"
             app:setAdapter="@{adapter}"
             app:submitList="@{viewModel.listItems}"
+            app:setConfiguration="@{viewModel.imageConfiguration}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentPopularMoviesBinding
+import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdaperListener
 import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdapter
 
-class PopularMoviesFragment: Fragment() {
+class PopularMoviesFragment: Fragment(), PopularMoviesAdaperListener {
 
     private lateinit var binding: FragmentPopularMoviesBinding
 
@@ -24,9 +25,13 @@ class PopularMoviesFragment: Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popular_movies, container, false)
         binding.viewModel = viewModel
-        binding.adapter = PopularMoviesAdapter()
+        binding.adapter = PopularMoviesAdapter(this)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onMovieClicked(movieId: Long) {
+
     }
 
 }

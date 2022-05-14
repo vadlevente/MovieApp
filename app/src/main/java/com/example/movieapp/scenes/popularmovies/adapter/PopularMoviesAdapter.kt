@@ -8,12 +8,15 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.BR
 import com.example.movieapp.R
+import com.example.movieapp.models.ImageConfiguration
 import com.example.movieapp.models.popularmovies.MovieOverview
 import com.example.movieapp.models.popularmovies.PopularMoviesListItem
 
-class PopularMoviesAdapter: RecyclerView.Adapter<PopularMoviesAdapter.MovieViewHolder>() {
+class PopularMoviesAdapter(private val listener: PopularMoviesAdaperListener): RecyclerView.Adapter<PopularMoviesAdapter.MovieViewHolder>() {
 
     var items = listOf<MovieOverview>()
+
+    var imageConfiguration: ImageConfiguration? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_item_popular_movies, parent, false)
@@ -21,7 +24,7 @@ class PopularMoviesAdapter: RecyclerView.Adapter<PopularMoviesAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], imageConfiguration)
     }
 
     override fun getItemCount(): Int {
@@ -29,10 +32,15 @@ class PopularMoviesAdapter: RecyclerView.Adapter<PopularMoviesAdapter.MovieViewH
     }
 
     class MovieViewHolder(private val binding: ViewDataBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: MovieOverview){
+        fun bind(item: MovieOverview, imageConfiguration: ImageConfiguration?){
             binding.setVariable(BR.movie, item)
+            binding.setVariable(BR.imageConfiguration, imageConfiguration)
             binding.executePendingBindings()
         }
     }
 
+}
+
+interface PopularMoviesAdaperListener{
+    fun onMovieClicked(movieId: Long)
 }
