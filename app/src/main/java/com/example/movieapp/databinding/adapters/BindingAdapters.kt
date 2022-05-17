@@ -97,8 +97,8 @@ fun setEmptyVisibility(textView: TextView, viewState: ViewState){
 }
 
 @BindingAdapter("setErrorVisibility")
-fun setErrorVisibility(textView: TextView, viewState: ViewState){
-    textView.isVisible = viewState is Error
+fun setErrorVisibility(view: View, viewState: ViewState){
+    view.isVisible = viewState is Error
 }
 
 @BindingAdapter("setProgressVisibility")

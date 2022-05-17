@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.datasource.SearchDataSource
 import com.example.movieapp.models.MovieOverview
+import com.example.movieapp.models.state.Content
+import com.example.movieapp.models.state.Error
+import com.example.movieapp.models.state.ViewState
 import com.example.movieapp.scenes.common.viewmodel.ViewModelBase
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -24,28 +27,27 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
     fun onSearchTextChanged(text: String){
         viewModelScope.launch{
             try {
+                if(text.isEmpty()){
+                    setEmptyState()
+                    return@launch
+                }
                 setLoadingState()
-                getData(text, true)
+                getData(text)
             } catch (t: Throwable){
-                setErrorState()
+                setErrorState(SearchMovieError(text))
             }
         }
     }
 
-    fun onSearchTextSubmitted(text: String){
-        viewModelScope.launch{
-            try {
-                setLoadingState()
-                getData(text, false)
-            } catch (t: Throwable){
-                setErrorState()
-            }
+    override fun onRetryTapped(errorState: ViewState) {
+        (errorState as? SearchMovieError)?.let {
+            onSearchTextChanged(it.query)
         }
     }
 
-    private suspend fun getData(query: String, fromCache: Boolean = true) {
+    private suspend fun getData(query: String) {
         getConfiguration()
-        getMovies(query, fromCache)
+        getMovies(query)
         if(_listItems.value.isNullOrEmpty()){
             setEmptyState()
         } else {
@@ -53,12 +55,8 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
         }
     }
 
-    private suspend fun getMovies(query: String, fromCache: Boolean = true) {
-        val movies = if(fromCache) {
-            searchDataSource.searchMovieFromCache(query)
-        } else {
-            searchDataSource.searchMovie(query)
-        }
+    private suspend fun getMovies(query: String) {
+        val movies = searchDataSource.searchMovie(query)
         submitList(movies)
     }
 
@@ -67,3 +65,5 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
     }
 
 }
+
+data class SearchMovieError(val query: String): Error()

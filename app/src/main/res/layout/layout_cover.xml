@@ -5,6 +5,9 @@
         <variable
             name="state"
             type="com.example.movieapp.models.state.ViewState" />
+        <variable
+            name="onRetryListener"
+            type="com.example.movieapp.scenes.common.viewmodel.ErrorHandlingViewModel" />
     </data>
 
     <FrameLayout
@@ -25,16 +28,30 @@
             setEmptyVisibility="@{state}"
             />
 
-        <TextView
+        <LinearLayout
+            setErrorVisibility="@{state}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textAlignment="center"
-            android:text="@string/warning_network_error"
-            setErrorVisibility="@{state}"
-            />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="@string/warning_network_error"
+                android:textAlignment="center" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:onClick="@{() -> onRetryListener.onRetryTapped(state)}"
+                android:text="@string/label_retry_action" />
+        </LinearLayout>
 
         <ProgressBar
             android:layout_width="90dp"

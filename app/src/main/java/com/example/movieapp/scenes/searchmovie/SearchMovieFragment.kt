@@ -40,7 +40,6 @@ class SearchMovieFragment: ToolbarFragment(), PopularMoviesAdaperListener {
     private fun setSearchViewListener() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.onSearchTextSubmitted(query ?: "")
                 return false
             }
 

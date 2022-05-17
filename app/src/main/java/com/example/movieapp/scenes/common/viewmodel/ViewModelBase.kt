@@ -1,5 +1,7 @@
 package com.example.movieapp.scenes.common.viewmodel
 
+import android.view.View
+import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +13,14 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-abstract class ViewModelBase: ViewModel(), KoinComponent {
+interface ErrorHandlingViewModel{
+    fun onRetryTapped(errorState: ViewState)
+}
+
+abstract class ViewModelBase:
+    ViewModel(),
+    ErrorHandlingViewModel,
+    KoinComponent {
 
     protected val configurationDataSource: ConfigurationDataSource by inject()
 
@@ -36,8 +45,8 @@ abstract class ViewModelBase: ViewModel(), KoinComponent {
         state.value = Content()
     }
 
-    protected fun setErrorState(){
-        state.value = Error()
+    protected fun setErrorState(error: Error? = null){
+        state.value = error ?: Error()
     }
 
     protected fun setEmptyState(){

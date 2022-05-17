@@ -6,6 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.movieapp.datasource.MovieDataSource
 import com.example.movieapp.models.MovieOverview
 import com.example.movieapp.models.MovieQueryResult
+import com.example.movieapp.models.state.Content
+import com.example.movieapp.models.state.Error
+import com.example.movieapp.models.state.ViewState
 import com.example.movieapp.scenes.common.viewmodel.ViewModelBase
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -34,6 +37,10 @@ class PopularMoviesViewModel: ViewModelBase(), KoinComponent {
                 setErrorState()
             }
         }
+    }
+
+    override fun onRetryTapped(errorState: ViewState) {
+        loadPopularMovies()
     }
 
     private suspend fun getData(page: Long) {

@@ -51,7 +51,9 @@
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                state="@{viewModel.state}"/>
+                state="@{viewModel.state}"
+                onRetryListener="@{viewModel}"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

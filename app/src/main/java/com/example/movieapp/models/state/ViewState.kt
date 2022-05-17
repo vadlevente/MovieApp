@@ -6,6 +6,6 @@ class Loading: ViewState()
 
 class Content: ViewState()
 
-class Error: ViewState()
+open class Error: ViewState()
 
 class Empty: ViewState()
