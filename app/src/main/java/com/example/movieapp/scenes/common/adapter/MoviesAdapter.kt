@@ -1,20 +1,20 @@
-package com.example.movieapp.scenes.popularmovies.adapter
+package com.example.movieapp.scenes.common.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.BR
 import com.example.movieapp.R
 import com.example.movieapp.models.ImageConfiguration
+import com.example.movieapp.models.MovieDiffUtil
 import com.example.movieapp.models.movieoverview.MovieOverview
 import com.example.movieapp.models.movieoverview.MoviesListItem
 
-class MoviesAdapter(private val listener: PopularMoviesAdapterListener): RecyclerView.Adapter<MoviesAdapter.MovieListViewHolder>() {
-
-    var items = listOf<MoviesListItem>()
+class MoviesAdapter(private val listener: PopularMoviesAdapterListener): ListAdapter<MoviesListItem, MoviesAdapter.MovieListViewHolder>(MovieDiffUtil()) {
 
     var imageConfiguration: ImageConfiguration? = null
 
@@ -32,7 +32,7 @@ class MoviesAdapter(private val listener: PopularMoviesAdapterListener): Recycle
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(items[position]){
+        return when(currentList[position]){
             is MovieOverview -> viewTypeMovie
             else -> viewTypeLoadMore
         }
@@ -40,7 +40,7 @@ class MoviesAdapter(private val listener: PopularMoviesAdapterListener): Recycle
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
         if(holder is MovieViewHolder) {
-            val movie = items[position] as? MovieOverview
+            val movie = currentList[position] as? MovieOverview
             movie?.let {
                 holder.bind(movie, imageConfiguration)
             }
@@ -48,7 +48,7 @@ class MoviesAdapter(private val listener: PopularMoviesAdapterListener): Recycle
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return currentList.size
     }
 
     abstract inner class MovieListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)

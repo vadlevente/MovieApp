@@ -22,9 +22,6 @@ class SearchMovieViewModel : MultiPageMovieListViewModel(), KoinComponent {
                 setEmptyState()
                 return@launch
             }
-            if(page == 1L) {
-                setLoadingState()
-            }
             getData(text, page)
         } catch (t: Throwable) {
             setErrorState(SearchMovieError(text))

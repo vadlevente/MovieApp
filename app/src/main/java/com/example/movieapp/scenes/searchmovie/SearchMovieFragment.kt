@@ -12,8 +12,8 @@ import com.example.movieapp.databinding.FragmentSearchMovieBinding
 import com.example.movieapp.extensions.navController
 import com.example.movieapp.extensions.showKeyboard
 import com.example.movieapp.scenes.common.ToolbarFragment
-import com.example.movieapp.scenes.popularmovies.adapter.MoviesAdapter
-import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdapterListener
+import com.example.movieapp.scenes.common.adapter.MoviesAdapter
+import com.example.movieapp.scenes.common.adapter.PopularMoviesAdapterListener
 
 class SearchMovieFragment: ToolbarFragment(), PopularMoviesAdapterListener {
 
@@ -30,21 +30,7 @@ class SearchMovieFragment: ToolbarFragment(), PopularMoviesAdapterListener {
         binding.viewModel = viewModel
         binding.adapter = MoviesAdapter(this)
         binding.lifecycleOwner = viewLifecycleOwner
-        setSearchViewListener()
         return binding.root
-    }
-
-    private fun setSearchViewListener() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.onSearchTextChanged(newText ?: "")
-                return true
-            }
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

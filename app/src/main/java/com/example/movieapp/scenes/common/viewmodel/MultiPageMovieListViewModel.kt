@@ -1,5 +1,6 @@
 package com.example.movieapp.scenes.common.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.example.movieapp.models.movieoverview.MoreIndicatorItem
 import com.example.movieapp.models.movieoverview.MovieQueryResult
 import com.example.movieapp.models.movieoverview.MoviesListItem
@@ -16,15 +17,17 @@ abstract class MultiPageMovieListViewModel(private val pagingEnabled: Boolean = 
     fun onPageEndReached(){
         if(!pagingEnabled || _listItems.isEmpty() || isLoading) return
         if(currentPage < totalPages){
-            loadNextPage(currentPage + 1, _listItems)
+            loadNextPage(currentPage + 1)
         }
     }
 
     override fun submitList(movies: MovieQueryResult) {
+        setPageValues(movies)
         finishLoadingMore()
         super.submitList(movies)
-        currentPage = movies.page
-        totalPages = movies.totalPages
+        if(currentPage < totalPages){
+            addLoadingItemToEndOfList()
+        }
     }
 
     override fun setErrorState(error: Error?) {
@@ -34,6 +37,11 @@ abstract class MultiPageMovieListViewModel(private val pagingEnabled: Boolean = 
             finishLoadingMore()
             setContentState()
         }
+    }
+
+    private fun setPageValues(movies: MovieQueryResult) {
+        currentPage = movies.page
+        totalPages = movies.totalPages
     }
 
     private fun finishLoadingMore(){
@@ -47,14 +55,13 @@ abstract class MultiPageMovieListViewModel(private val pagingEnabled: Boolean = 
         }
     }
 
-    private fun loadNextPage(pageNumber: Long, currentList: List<MoviesListItem>) {
-        addLoadingItemToEndOfList(currentList)
+    private fun loadNextPage(pageNumber: Long) {
         isLoading = true
         loadNextPageData(pageNumber)
     }
 
-    private fun addLoadingItemToEndOfList(currentList: List<MoviesListItem>) {
-        val currentListWithMoreIndicator = currentList.toMutableList()
+    private fun addLoadingItemToEndOfList() {
+        val currentListWithMoreIndicator = _listItems.toMutableList()
         currentListWithMoreIndicator.add(MoreIndicatorItem())
         _listItems = currentListWithMoreIndicator
     }

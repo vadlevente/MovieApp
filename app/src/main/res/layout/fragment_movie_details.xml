@@ -205,8 +205,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 layout="@layout/layout_cover"
-                onRetryListener="@{viewModel}"
-                state="@{viewModel.state}" />
+                app:onRetryListener="@{viewModel}"
+                app:state="@{viewModel.state}" />
 
 
         </FrameLayout>
