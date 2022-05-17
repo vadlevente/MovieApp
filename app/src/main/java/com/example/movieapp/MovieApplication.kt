@@ -1,7 +1,6 @@
 package com.example.movieapp
 
 import android.app.Application
-import android.content.Context
 import com.example.movieapp.di.appModule
 import com.example.movieapp.di.networkModule
 import org.koin.android.ext.koin.androidContext

@@ -1,41 +1,33 @@
 package com.example.movieapp.scenes.searchmovie
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.movieapp.datasource.SearchDataSource
-import com.example.movieapp.models.MovieOverview
 import com.example.movieapp.models.state.Content
 import com.example.movieapp.models.state.Error
 import com.example.movieapp.models.state.ViewState
-import com.example.movieapp.scenes.common.viewmodel.ViewModelBase
-import kotlinx.coroutines.launch
+import com.example.movieapp.scenes.common.viewmodel.MultiPageMovieListViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class SearchMovieViewModel: ViewModelBase(), KoinComponent {
+class SearchMovieViewModel : MultiPageMovieListViewModel(), KoinComponent {
 
     private val searchDataSource: SearchDataSource by inject()
-
-    private val _listItems = MutableLiveData<List<MovieOverview>>()
-    val listItems: LiveData<List<MovieOverview>> = _listItems
 
     init {
         setEmptyState()
     }
 
-    fun onSearchTextChanged(text: String){
-        viewModelScope.launch{
-            try {
-                if(text.isEmpty()){
-                    setEmptyState()
-                    return@launch
-                }
-                setLoadingState()
-                getData(text)
-            } catch (t: Throwable){
-                setErrorState(SearchMovieError(text))
+    fun onSearchTextChanged(text: String, page: Long = 1) = launch {
+        try {
+            if (text.isEmpty()) {
+                setEmptyState()
+                return@launch
             }
+            if(page == 1L) {
+                setLoadingState()
+            }
+            getData(text, page)
+        } catch (t: Throwable) {
+            setErrorState(SearchMovieError(text))
         }
     }
 
@@ -45,25 +37,24 @@ class SearchMovieViewModel: ViewModelBase(), KoinComponent {
         }
     }
 
-    private suspend fun getData(query: String) {
-        getConfiguration()
-        getMovies(query)
-        if(_listItems.value.isNullOrEmpty()){
-            setEmptyState()
-        } else {
-            setContentState()
+    override fun loadNextPageData(pageNumber: Long) {
+        (state.value as? SearchMovieContent)?.let {
+            onSearchTextChanged(it.query, pageNumber)
         }
     }
 
-    private suspend fun getMovies(query: String) {
-        val movies = searchDataSource.searchMovie(query)
-        submitList(movies)
+    private suspend fun getData(query: String, page: Long) {
+        getConfiguration()
+        getMovies(query, page)
+        setListDependentState(SearchMovieContent(query))
     }
 
-    private fun submitList(movies: List<MovieOverview>){
-       _listItems.value = movies
+    private suspend fun getMovies(query: String, page: Long) {
+        val movies = searchDataSource.searchMovie(query, page)
+        submitList(movies)
     }
 
 }
 
-data class SearchMovieError(val query: String): Error()
+data class SearchMovieContent(val query: String) : Content()
+data class SearchMovieError(val query: String) : Error()

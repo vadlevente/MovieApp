@@ -1,7 +1,7 @@
 package com.example.movieapp.datasource
 
 import com.example.movieapp.models.MovieDetails
-import com.example.movieapp.models.MovieQueryResult
+import com.example.movieapp.models.movieoverview.MovieQueryResult
 import com.example.movieapp.network.api.MovieApi
 
 interface MovieDataSource{

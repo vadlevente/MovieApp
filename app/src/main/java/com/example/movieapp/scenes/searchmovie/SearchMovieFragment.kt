@@ -8,17 +8,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.movieapp.R
-import com.example.movieapp.databinding.FragmentPopularMoviesBinding
 import com.example.movieapp.databinding.FragmentSearchMovieBinding
 import com.example.movieapp.extensions.navController
 import com.example.movieapp.extensions.showKeyboard
 import com.example.movieapp.scenes.common.ToolbarFragment
-import com.example.movieapp.scenes.popularmovies.PopularMoviesFragmentDirections
-import com.example.movieapp.scenes.popularmovies.PopularMoviesViewModel
 import com.example.movieapp.scenes.popularmovies.adapter.MoviesAdapter
-import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdaperListener
+import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdapterListener
 
-class SearchMovieFragment: ToolbarFragment(), PopularMoviesAdaperListener {
+class SearchMovieFragment: ToolbarFragment(), PopularMoviesAdapterListener {
 
     private lateinit var binding: FragmentSearchMovieBinding
 

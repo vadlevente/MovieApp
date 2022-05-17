@@ -1,7 +1,6 @@
 package com.example.movieapp.datasource
 
 import com.example.movieapp.network.model.NetworkError
-import com.example.movieapp.network.model.response.PostResponse
 import retrofit2.Response
 
 open class DataSourceBase {

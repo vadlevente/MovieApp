@@ -1,50 +1,22 @@
 package com.example.movieapp.databinding.adapters
 
 import android.net.Uri
-import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.models.Genre
 import com.example.movieapp.models.ImageConfiguration
-import com.example.movieapp.models.MovieOverview
-import com.example.movieapp.models.state.*
-import com.example.movieapp.scenes.popularmovies.adapter.MoviesAdapter
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-@BindingAdapter(value = ["submitList", "setConfiguration"])
-fun submitList(recyclerView: RecyclerView, list: List<MovieOverview>?, imageConfiguration: ImageConfiguration?) {
-    val adapter = recyclerView.adapter as? MoviesAdapter
-    adapter?.apply {
-        if(list != null && imageConfiguration != null) {
-            items = list
-            this.imageConfiguration = imageConfiguration
-            notifyDataSetChanged()
-        }
-    }
-}
-
-@BindingAdapter("setAdapter")
-fun setAdapter(recyclerView: RecyclerView, adapter: MoviesAdapter){
-    recyclerView.adapter = adapter
-}
-
 @BindingAdapter(value = ["setImage", "setImageConfiguration"])
 fun setImage(imageView: ImageView, path: String?, imageConfiguration: ImageConfiguration?){
-    var uri: Uri? = null
-    if(path != null && imageConfiguration != null) {
-        val urlPath =
-            "${imageConfiguration.baseUrl}${imageConfiguration.imageSizes.lastOrNull()}$path"
-        uri = Uri.parse(urlPath)
-    }
+    var uri: Uri? = getImageUri(path, imageConfiguration)
     Glide.with(imageView.context)
         .load(uri)
         .placeholder(R.drawable.ic_film_placeholder)
@@ -86,27 +58,20 @@ fun setGenreText(view: TextView, genres: List<Genre>?){
     view.text = genreString
 }
 
-@BindingAdapter("setCoverVisibility")
-fun setCoverVisibility(view: View, viewState: ViewState){
-    view.isVisible = viewState !is Content
-}
-
-@BindingAdapter("setEmptyVisibility")
-fun setEmptyVisibility(textView: TextView, viewState: ViewState){
-    textView.isVisible = viewState is Empty
-}
-
-@BindingAdapter("setErrorVisibility")
-fun setErrorVisibility(view: View, viewState: ViewState){
-    view.isVisible = viewState is Error
-}
-
-@BindingAdapter("setProgressVisibility")
-fun setProgressVisibility(progressBar: ProgressBar, viewState: ViewState){
-    progressBar.isVisible = viewState is Loading
-}
-
 private fun getDateText(date: Date, format: String): String{
     val dateFormat = SimpleDateFormat(format)
     return dateFormat.format(date)
+}
+
+private fun getImageUri(
+    path: String?,
+    imageConfiguration: ImageConfiguration?
+): Uri? {
+    var uri: Uri? = null
+    if (path != null && imageConfiguration != null) {
+        val urlPath =
+            "${imageConfiguration.baseUrl}${imageConfiguration.imageSizes.lastOrNull()}$path"
+        uri = Uri.parse(urlPath)
+    }
+    return uri
 }

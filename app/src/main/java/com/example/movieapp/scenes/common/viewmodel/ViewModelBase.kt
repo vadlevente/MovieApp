@@ -1,7 +1,5 @@
 package com.example.movieapp.scenes.common.viewmodel
 
-import android.view.View
-import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.movieapp.datasource.ConfigurationDataSource
 import com.example.movieapp.models.ImageConfiguration
 import com.example.movieapp.models.state.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -22,7 +22,7 @@ abstract class ViewModelBase:
     ErrorHandlingViewModel,
     KoinComponent {
 
-    protected val configurationDataSource: ConfigurationDataSource by inject()
+    private val configurationDataSource: ConfigurationDataSource by inject()
 
     private val _imageConfiguration = MutableLiveData<ImageConfiguration>()
     val imageConfiguration: LiveData<ImageConfiguration> = _imageConfiguration
@@ -30,27 +30,32 @@ abstract class ViewModelBase:
     val state = MutableLiveData<ViewState>()
 
     init {
-        state.value = Loading()
+        state.value = Loading
     }
 
     protected suspend fun getConfiguration(){
-        _imageConfiguration.value = configurationDataSource.getConfiguration()
+        val configuration = configurationDataSource.getConfiguration()
+        _imageConfiguration.postValue(configuration)
+    }
+
+    protected fun launch(body: suspend () -> Unit): Job {
+        return viewModelScope.launch(Dispatchers.IO){body()}
     }
 
     protected fun setLoadingState(){
-        state.value = Loading()
+        state.postValue(Loading)
     }
 
-    protected fun setContentState(){
-        state.value = Content()
+    protected fun setContentState(content: Content? = null){
+        state.postValue(content ?: Content())
     }
 
-    protected fun setErrorState(error: Error? = null){
-        state.value = error ?: Error()
+    protected open fun setErrorState(error: Error? = null){
+        state.postValue(error ?: Error())
     }
 
     protected fun setEmptyState(){
-        state.value = Empty()
+        state.postValue(Empty)
     }
 
     protected fun isInErrorState(): Boolean{

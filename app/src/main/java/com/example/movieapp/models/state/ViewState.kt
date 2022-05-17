@@ -2,10 +2,10 @@ package com.example.movieapp.models.state
 
 sealed class ViewState
 
-class Loading: ViewState()
+object Loading : ViewState()
 
-class Content: ViewState()
+open class Content: ViewState()
 
 open class Error: ViewState()
 
-class Empty: ViewState()
+object Empty : ViewState()

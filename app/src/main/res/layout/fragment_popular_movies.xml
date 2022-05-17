@@ -42,6 +42,7 @@
                 app:setAdapter="@{adapter}"
                 app:submitList="@{viewModel.listItems}"
                 app:setConfiguration="@{viewModel.imageConfiguration}"
+                app:setScrollListener="@{viewModel}"
                 />
 
             <include layout="@layout/layout_cover"

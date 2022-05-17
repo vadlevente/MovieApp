@@ -3,7 +3,6 @@ package com.example.movieapp.extensions
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 
 
 fun View.showKeyboard(){

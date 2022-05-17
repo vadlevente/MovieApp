@@ -1,27 +1,23 @@
 package com.example.movieapp.datasource
 
-import com.example.movieapp.models.MovieOverview
+import com.example.movieapp.models.movieoverview.MovieQueryResult
 import com.example.movieapp.network.api.SearchApi
 
 interface SearchDataSource{
-    suspend fun searchMovie(query: String): List<MovieOverview>
+    suspend fun searchMovie(query: String, page: Long): MovieQueryResult
 }
 
 class NetworkSearchDataSource(private val searchApi: SearchApi): DataSourceBase(), SearchDataSource {
 
-    override suspend fun searchMovie(query: String): List<MovieOverview> {
-        if(!movieSearchCache.containsKey(query)) {
-            val response = searchApi.searchMovie(query)
-            movieSearchCache[query] = handleGetResponse(response).results
+    override suspend fun searchMovie(query: String, page: Long): MovieQueryResult {
+        if(!movieSearchCache.containsKey(Pair(query, page))) {
+            val response = searchApi.searchMovie(query, page)
+            movieSearchCache[Pair(query, page)] = handleGetResponse(response)
         }
-        return getMovieFromCache(query)
-    }
-
-    private fun getMovieFromCache(query: String): List<MovieOverview>{
-        return movieSearchCache[query] ?: emptyList()
+        return movieSearchCache[Pair(query, page)]!!
     }
 
     companion object{
-        var movieSearchCache = mutableMapOf<String, List<MovieOverview>>()
+        var movieSearchCache = mutableMapOf<Pair<String, Long>, MovieQueryResult>()
     }
 }

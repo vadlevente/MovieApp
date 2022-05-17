@@ -1,7 +1,6 @@
 package com.example.movieapp.models
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
 import java.util.*
 
 data class MovieDetails(

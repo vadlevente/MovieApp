@@ -1,6 +1,5 @@
-package com.example.movieapp.models
+package com.example.movieapp.models.movieoverview
 
-import com.example.movieapp.models.popularmovies.PopularMoviesListItem
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -15,4 +14,4 @@ data class MovieOverview(
     val releaseDate: Date?,
     @SerializedName("vote_average")
     val rating: Float
-): PopularMoviesListItem
+): MoviesListItem

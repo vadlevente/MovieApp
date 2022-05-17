@@ -1,10 +1,10 @@
 package com.example.movieapp.di
 
 import com.example.movieapp.datasource.*
-import com.example.movieapp.network.api.MovieApi
 import com.example.movieapp.network.NetworkModule
 import com.example.movieapp.network.NetworkModuleImpl
 import com.example.movieapp.network.api.ConfigurationApi
+import com.example.movieapp.network.api.MovieApi
 import com.example.movieapp.network.api.SearchApi
 import org.koin.dsl.module
 

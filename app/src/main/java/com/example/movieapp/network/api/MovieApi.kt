@@ -1,9 +1,11 @@
 package com.example.movieapp.network.api
 
 import com.example.movieapp.models.MovieDetails
-import com.example.movieapp.models.MovieQueryResult
+import com.example.movieapp.models.movieoverview.MovieQueryResult
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieApi {
 

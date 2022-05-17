@@ -3,7 +3,6 @@ package com.example.movieapp.network.typeadapters
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import java.lang.Exception
 import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,3 +1,0 @@
-package com.example.movieapp.models.popularmovies
-
-interface PopularMoviesListItem

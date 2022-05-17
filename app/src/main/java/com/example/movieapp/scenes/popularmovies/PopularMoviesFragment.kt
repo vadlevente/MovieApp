@@ -10,10 +10,10 @@ import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentPopularMoviesBinding
 import com.example.movieapp.extensions.navController
 import com.example.movieapp.scenes.common.ToolbarFragment
-import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdaperListener
 import com.example.movieapp.scenes.popularmovies.adapter.MoviesAdapter
+import com.example.movieapp.scenes.popularmovies.adapter.PopularMoviesAdapterListener
 
-class PopularMoviesFragment: ToolbarFragment(), PopularMoviesAdaperListener {
+class PopularMoviesFragment: ToolbarFragment(), PopularMoviesAdapterListener {
 
     private lateinit var binding: FragmentPopularMoviesBinding
 
