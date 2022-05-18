@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/action_popular_movies.xml" value="0.365625" />
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/action_search_movie.xml" value="0.23374083129584353" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/fragment_movie_details.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/fragment_popular_movies.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/fragment_search_movie.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/header_navigation_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/layout_cover.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/list_item_load_more.xml" value="0.365625" />
         <entry key="..\:/Users/vadle/AndroidStudioProjects/MovieApp/app/src/main/res/layout/list_item_movie_list.xml" value="0.23229166666666667" />

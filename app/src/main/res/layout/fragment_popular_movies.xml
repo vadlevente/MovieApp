@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 app:layout_constraintTop_toTopOf="parent"
+                android:theme="@style/Toolbar"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,7 @@
                 android:paddingTop="4dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"
+                android:theme="@style/ScreenBackground"
                 app:setAdapter="@{adapter}"
                 app:submitList="@{viewModel.listItems}"
                 app:setConfiguration="@{viewModel.imageConfiguration}"
@@ -63,8 +65,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:fitsSystemWindows="true"
+            app:itemTextColor="@color/nav_item_state_selector"
+            app:itemIconTint="@color/nav_item_state_selector"
             app:menu="@menu/menu_drawer"
+            android:theme="@style/NavigationView"
             />
 
     </androidx.drawerlayout.widget.DrawerLayout>

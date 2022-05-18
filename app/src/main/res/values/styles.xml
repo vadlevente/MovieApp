@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PrimaryText">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="SecondaryText">
+        <item name="android:textColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="BoldText" parent="PrimaryText">
+        <item name="fontFamily">@font/opensans_bold</item>
+    </style>
+
+    <style name="MediumText" parent="SecondaryText">
+        <item name="fontFamily">@font/opensans_medium</item>
+    </style>
+
+    <style name="RegularText" parent="SecondaryText">
+        <item name="fontFamily">@font/opensans_regular</item>
+    </style>
+
+    <style name="MovieOverviewTitle" parent="BoldText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MovieOverviewSubtitle" parent="MediumText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MovieDetailTitle" parent="BoldText">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="MovieDetailTagline">
+        <item name="fontFamily">@font/opensans_bolditalic</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="MovieDetailOverview" parent="RegularText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MovieDetailDetailsTitle" parent="BoldText">
+        <item name="android:textSize">29sp</item>
+    </style>
+
+    <style name="MovieDetailDetailsValue" parent="MediumText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="CoverLayoutText" parent="MediumText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="RetryButton">
+        <item name="backgroundTint">@color/colorSecondary</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="Progress">
+        <item name="android:indeterminateTint">@color/progressColor</item>
+        <item name="android:progressTint">@color/progressColor</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorPrimary</item>
+        <item name="actionMenuTextColor">@color/textColorPrimary</item>
+        <item name="android:background">@color/colorSecondary</item>
+    </style>
+
+    <style name="ScreenBackground">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ListItemBackground">
+        <item name="android:background">@color/colorListItem</item>
+    </style>
+
+    <style name="SearchView" parent="SecondaryText">
+        <item name="android:textColorHint">@color/textColorPrimary</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:clickable">true</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="NavigationView">
+        <item name="android:background">@color/colorSecondary</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="headerLayout">@layout/header_navigation_view</item>
+    </style>
+
+</resources>

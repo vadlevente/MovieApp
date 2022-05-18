@@ -21,13 +21,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:theme="@style/Toolbar"/>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:theme="@style/ScreenBackground">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -40,59 +42,28 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="8dp"
                     android:orientation="vertical"
+                    android:layout_marginBottom="24dp"
                     android:paddingBottom="24dp">
 
                     <TextView
                         android:id="@+id/tv_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="2"
                         android:text="@{viewModel.details.title}"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:theme="@style/MovieDetailTitle"/>
+
+                    <TextView
+                        android:id="@+id/tv_tagline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.details.tagline}"
+                        android:theme="@style/MovieDetailTagline"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/tv_tagline"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="@{viewModel.details.tagline}"
-                            app:layout_constraintBottom_toBottomOf="@id/ll_rating"
-                            app:layout_constraintEnd_toStartOf="@id/ll_rating"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/ll_rating" />
-
-                        <LinearLayout
-                            android:id="@+id/ll_rating"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginEnd="8dp"
-                                android:src="@drawable/ic_star" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@{viewModel.details.rating}" />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardView_image"
@@ -115,85 +86,115 @@
 
                         </com.google.android.material.card.MaterialCardView>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingStart="8dp"
-                            android:text="@{viewModel.details.overview}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/cardView_image"
-                            app:layout_constraintTop_toTopOf="@id/cardView_image" />
+                            app:layout_constraintTop_toTopOf="@id/cardView_image"
+                            app:layout_constraintBottom_toBottomOf="@id/cardView_image"
+                            android:orientation="vertical"
+                            android:gravity="end">
+
+                            <LinearLayout
+                                android:id="@+id/ll_rating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/ic_star" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewModel.details.rating}"
+                                    android:theme="@style/MovieDetailDetailsTitle"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                setDetailedDateText="@{viewModel.details.releaseDate}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:visibility="@{viewModel.details.releaseDate == null ? View.GONE : View.VISIBLE}"
+                                android:theme="@style/MovieDetailDetailsTitle"/>
+
+                        </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:visibility="@{viewModel.details.releaseDate == null ? View.GONE : View.VISIBLE}">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/label_release_date" />
-
-                        <TextView
-                            setDetailedDateText="@{viewModel.details.releaseDate}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp" />
-                    </LinearLayout>
+                        android:text="@{viewModel.details.overview}"
+                        android:layout_marginTop="16dp"
+                        android:theme="@style/MovieDetailOverview"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="24dp"
+                        android:orientation="vertical"
                         android:visibility="@{viewModel.details.genres.size == 0 ? View.GONE : View.VISIBLE}">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/label_genres" />
+                            android:text="@string/label_genres"
+                            android:theme="@style/MovieDetailDetailsTitle"/>
 
                         <TextView
                             genreText="@{viewModel.details.genres}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp" />
+                            android:layout_marginTop="6dp"
+                            android:theme="@style/MovieDetailDetailsValue"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:orientation="vertical"
+                        android:layout_marginTop="24dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/label_budget" />
+                            android:text="@string/label_budget"
+                            android:theme="@style/MovieDetailDetailsTitle"/>
 
                         <TextView
                             currencyText="@{viewModel.details.budget}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp" />
+                            android:layout_marginTop="6dp"
+                            android:theme="@style/MovieDetailDetailsValue"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
+                        android:orientation="vertical"
+                        android:layout_marginTop="24dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/label_revenue" />
+                            android:text="@string/label_revenue"
+                            android:theme="@style/MovieDetailDetailsTitle"/>
 
                         <TextView
                             currencyText="@{viewModel.details.revenue}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp" />
+                            android:layout_marginTop="4dp"
+                            android:theme="@style/MovieDetailDetailsValue"/>
                     </LinearLayout>
 
                 </LinearLayout>

@@ -4,11 +4,10 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.models.ImageConfiguration
-import com.example.movieapp.models.movieoverview.MoreIndicatorItem
 import com.example.movieapp.models.movieoverview.MovieOverview
 import com.example.movieapp.models.movieoverview.MoviesListItem
-import com.example.movieapp.scenes.common.viewmodel.MultiPageMovieListViewModel
 import com.example.movieapp.scenes.common.adapter.MoviesAdapter
+import com.example.movieapp.scenes.common.viewmodel.MultiPageMovieListViewModel
 
 @BindingAdapter(value = ["submitList", "setConfiguration"])
 fun submitList(

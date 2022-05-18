@@ -1,9 +1,7 @@
 package com.example.movieapp.scenes.common.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import com.example.movieapp.models.movieoverview.MoreIndicatorItem
 import com.example.movieapp.models.movieoverview.MovieQueryResult
-import com.example.movieapp.models.movieoverview.MoviesListItem
 import com.example.movieapp.models.state.Error
 
 abstract class MultiPageMovieListViewModel(private val pagingEnabled: Boolean = true): MovieListViewModel() {
