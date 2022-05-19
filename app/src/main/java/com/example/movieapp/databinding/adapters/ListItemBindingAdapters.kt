@@ -16,7 +16,7 @@ import java.util.*
 
 @BindingAdapter(value = ["setImage", "setImageConfiguration"])
 fun setImage(imageView: ImageView, path: String?, imageConfiguration: ImageConfiguration?){
-    var uri: Uri? = getImageUri(path, imageConfiguration)
+    val uri: Uri? = getImageUri(path, imageConfiguration)
     Glide.with(imageView.context)
         .load(uri)
         .placeholder(R.drawable.ic_film_placeholder)
@@ -26,19 +26,12 @@ fun setImage(imageView: ImageView, path: String?, imageConfiguration: ImageConfi
 
 @BindingAdapter("setSimpleDateText")
 fun setSimpleDateText(textView: TextView, date: Date?){
-    if(date != null){
-        textView.isVisible = true
-        textView.text = getDateText(date, "yyyy")
-    } else {
-        textView.isVisible = false
-    }
+    setDateText(date, textView, "yyyy")
 }
 
 @BindingAdapter("setDetailedDateText")
 fun setDetailedDateText(textView: TextView, date: Date?){
-    date?.let {
-        textView.text = getDateText(date, "yyyy. MM. dd.")
-    }
+    setDateText(date, textView, "yyyy. MM. dd.")
 }
 
 @BindingAdapter("android:text")
@@ -56,6 +49,15 @@ fun setCurrencyText(view: TextView, value: Long){
 fun setGenreText(view: TextView, genres: List<Genre>?){
     val genreString = genres?.joinToString(", ") { it.name }
     view.text = genreString
+}
+
+private fun setDateText(date: Date?, textView: TextView, format: String) {
+    if (date != null) {
+        textView.isVisible = true
+        textView.text = getDateText(date, format)
+    } else {
+        textView.isVisible = false
+    }
 }
 
 private fun getDateText(date: Date, format: String): String{
