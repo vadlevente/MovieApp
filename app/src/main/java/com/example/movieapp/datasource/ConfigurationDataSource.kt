@@ -17,8 +17,6 @@ class NetworkConfigurationDataSource(private val configurationApi: Configuration
         return configurationCache!!
     }
 
-    companion object {
-        private var configurationCache: ImageConfiguration? = null
-    }
+    private var configurationCache: ImageConfiguration? = null
 
 }

@@ -17,7 +17,6 @@ class NetworkSearchDataSource(private val searchApi: SearchApi): DataSourceBase(
         return movieSearchCache[Pair(query, page)]!!
     }
 
-    companion object{
-        var movieSearchCache = mutableMapOf<Pair<String, Long>, MovieQueryResult>()
-    }
+    var movieSearchCache = mutableMapOf<Pair<String, Long>, MovieQueryResult>()
+
 }
