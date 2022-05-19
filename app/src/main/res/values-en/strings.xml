@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_genres">Genres</string>
+    <string name="label_budget">Budget</string>
+    <string name="label_release_date">Released at</string>
+    <string name="label_revenue">Revenue</string>
+    <string name="label_popular_movies">Popular movies</string>
+    <string name="label_search_movies">Search movie</string>
+    <string name="label_movie_details">Movie details</string>
+    <string name="label_retry_action">Refresh</string>
+    <string name="hint_search">Movie title</string>
+    <string name="warning_empty_list">Nem található a keresésnek megfelelő elem</string>
+    <string name="warning_network_error">An error occurred during communication with server!\nPlease, check your Internet connection!</string>
+</resources>
